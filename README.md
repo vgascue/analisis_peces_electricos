@@ -1,14 +1,14 @@
 # Electric fish analysis
 ## Introducción
-Este repositorio contiene scripts para analizar los datos obtenidos de la estacion conductual de peces eléctricos de Facultad de Ciencias (Dentro del sub repositorio - Gymnotus omarorum). Contiene analisis exploratorios asi como más generales para los registros eléctricos y el trackeo realizado por DeepLabCut sobre los videos.
-Cada archivo está comentado y con una breve introducciôn al comienzo. Los detalles de funcionamiento de cada script se encontrara en los comentarios, en este documento hacemos una recorrida general por el repositorio.  
+Este repositorio contiene scripts para analizar los datos obtenidos de la estacion conductual de peces eléctricos de Facultad de Ciencias. Contiene analisis exploratorios asi como más generales para los registros eléctricos y el trackeo realizado por DeepLabCut sobre los videos.
+Cada archivo está comentado y con una breve introduccion al comienzo. Los detalles de funcionamiento de cada script se encontrara en los comentarios, en este documento hacemos una recorrida general por el repositorio.  
 
 A su vez contiene scripts utilizados para el analisis de datos conductuales obtenidos en el laboratorio de Nate Sawtell (Columbia University) de individuos de la especie Gnathonemus Petersii (carpeta Gnathonemus Petersii). Estos scripts estan comentados pero no seran descritos en esta guia. 
 
 El siguiente diagrama esquematiza el funcionamiento de este repositorio y el tipo de datos que toma y que devuelve:
  <img src="/images/diagrama.png" alt="structure_repo" width="800"/>
  
- Como se muestra en el diagrama, los datos de la estación conductual son obtenidos mediante Bonsai rx. (Lopes et al, 2015)[^1]. El workflow correspondiente se encuentra en la carpeta "registro". De esta manera se obtienen archivos de video en formato ".avi" y archivos numericos que contienen el registro eléctrico en formato ".bin". Los archivos de registro eléctrico pasan directamente a ser analizados por codigo de este repositorio (en el esquema: todo lo que se encuentra dentro del recuadro rojo). Los videos son procesados inicialmente por DeepLabCut (Mathis et al., 2018)[^2] , por un modelo entrenado por la autora de este repositorio con datos generados para su tesis de maestria (carpeta "DeepLabCut"). Se aconseja para futuros experimentos entrenar un nuevo modelo con los videos generados en ese momento, para asegurar un buen trackeo. Luego de trackear al animal utilizando DeepLabCut (u otro sistema de tracking), los archivos ".h5" con las posiciones de 
+ Como se muestra en el diagrama, los datos de la estación conductual son obtenidos mediante Bonsai rx. (Lopes et al, 2015)[^1]. El workflow correspondiente se encuentra en la carpeta "registro". De esta manera se obtienen archivos de video en formato ".avi" y archivos numericos que contienen el registro eléctrico en formato ".bin". Los archivos de registro eléctrico pasan directamente a ser analizados por codigo de este repositorio (en el esquema: todo lo que se encuentra dentro del recuadro rojo). Los videos son procesados inicialmente por DeepLabCut (Mathis et al., 2018)[^2] , por un modelo entrenado por la autora de este repositorio con datos generados para su tesis de maestria (carpeta "DeepLabCut"). Se aconseja para futuros experimentos entrenar un nuevo modelo con los videos generados en ese momento, para asegurar un buen seguimiento. Luego de trackear al animal utilizando DeepLabCut (u otro sistema de tracking), los archivos ".h5" con las posiciones de cada punto seran utilizados para analisis generales, como los que se describen en esta guia y tutorial; asi como para otros analisis que no se describen pero se puede encontrar ejemplos en la carpeta de G. petersii.
  
 A continuación se detalla la funcionalidad de cada archivo y un sugerido workflow para comenzar el analisis de datos conductuales de la estacion. 
 
@@ -46,7 +46,8 @@ Estas rutinas generan la estructura de datos que analizaremos a partir de los da
       
         <img src="/images/data.png" alt="data_structure_EOD" width="400"/>
 
-   3. get_centroids.ipynb: 
+   2. _Adquisicion_locomocion.py:_
+               Este script genera el analisis inicial de la locomocion. Para esto suaviza el trackeo y calcula el tiempo en movimiento del animal a lo largo del registro brindado. A su vez genera los mapas de distribucion espacial del tiempo de visita, frecuencia de descarga y densidad de muestreo. 
                 
 
 ### Post-procesamiento
@@ -54,8 +55,7 @@ Estas rutinas generan la estructura de datos que analizaremos a partir de los da
 
 ## Workflow sugerido
 
-Una vez obtenidos los archivos de video y de registro eléctrico de la estación conductual, se sugiere comenzar con el análisis de la Frecuencia Basal de la Descarga del Organo Eléctrico (FBDOE). Para esto, se recomienda comenzar con la exploración ("Exploracion_DOE.ipynb") para cada pez. Luego de explorar los registros para cada pez y determinar los umbrales apropiados para la detección de las descargas, pasar a "Adquisicion_FBDOE.py". Este codigo deberia ser ejecutado para cada pez, para lo cual se debe ir modificando el umbral de forma apropiada. 
-
+Una vez obtenidos los archivos de video y de registro eléctrico de la estación conductual, se sugiere comenzar con el análisis de la Frecuencia Basal de la Descarga del Organo Eléctrico (FBDOE). Para esto, se recomienda comenzar con la exploración ("Exploracion_DOE.ipynb") para cada pez. Luego de explorar los registros para cada pez y determinar los umbrales apropiados para la detección de las descargas, pasar a "Adquisicion_FBDOE.py". 
 
 Para el analisis de la actividad locomotora, se deberia obtener el segumiento del animal utilizando algun sistema de tracking. Si se utiliza DeepLabCut, se puede pasar directamente a utilizar el código aquí publicado. En caso de utilizar otro sistema de tracking, el código aqui presente ha de ser modificado como sea apropiado. 
 
