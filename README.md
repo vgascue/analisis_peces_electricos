@@ -51,7 +51,7 @@ Estas rutinas generan la estructura de datos que analizaremos a partir de los da
                 
 
 ### Post-procesamiento
-
+Una vez se obtiene el archivo pkl de actividad electrica y el analisis locomotor inicial, se puede seguir con otros procesamientos. Esto incluye la evaluacion de los modelos entrenados, analisis estadisticos de variables relevantes, etc. En este repositorio se provee un script para analizar el rendimiento de DeepLabCut (eval_DLC.py). Ejemplos de otros procesamientos, como la segmentacion de unidades comportamentales se pueden acceder en la carpeta G. petersii
 
 ## Workflow sugerido
 
