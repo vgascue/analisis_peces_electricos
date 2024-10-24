@@ -1,4 +1,4 @@
-# Electric fish analysis
+# Analisis Comportamental en Peces electricos
 ## Introducción
 Este repositorio contiene scripts para analizar los datos obtenidos de la estacion conductual de peces eléctricos de Facultad de Ciencias. Contiene analisis exploratorios asi como más generales para los registros eléctricos y el trackeo realizado por DeepLabCut sobre los videos.
 Cada archivo está comentado y con una breve introduccion al comienzo. Los detalles de funcionamiento de cada script se encontrara en los comentarios, en este documento hacemos una recorrida general por el repositorio.  
